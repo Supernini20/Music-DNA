@@ -1,1 +1,42 @@
+# Virtuelle Umgebung
+venv/
+.venv/
+env/
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Build-Dateien
+build/
+dist/
+*.egg-info/
+
+# Test & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Datenbanken
+*.db
+*.sqlite
+*.sqlite3
+
+# Umgebungsvariablen
+.env
+
+# VS Code
+.vscode/
+
+# JetBrains (PyCharm)
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Logs
+*.log
