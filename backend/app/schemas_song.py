@@ -1,17 +1,29 @@
 from pydantic import BaseModel
+from typing import Optional
 
 
-class SongCreate(BaseModel):
+class SongBase(BaseModel):
     title: str
     artist: str
-    album: str | None = None
-    genre: str | None = None
-    year: int | None = None
+    album: Optional[str] = None
+    genre: Optional[str] = None
+    release_year: Optional[int] = None
 
 
-class Song(SongCreate):
+class SongCreate(SongBase):
+    pass
+
+
+class SongUpdate(BaseModel):
+    title: Optional[str] = None
+    artist: Optional[str] = None
+    album: Optional[str] = None
+    genre: Optional[str] = None
+    release_year: Optional[int] = None
+
+
+class SongResponse(SongBase):
     id: int
 
-    model_config = {
-        "from_attributes": True
-    }
+    class Config:
+        from_attributes = True
