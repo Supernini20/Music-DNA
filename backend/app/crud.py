@@ -6,11 +6,31 @@ from .schemas_song import SongCreate, SongUpdate
 
 def create_song(db: Session, song: SongCreate):
     db_song = Song(
+        external_id=song.external_id,
         title=song.title,
         artist=song.artist,
         album=song.album,
-        genre=song.genre,
-        release_year=song.release_year
+
+        duration_s=song.duration_s,
+
+        # Audio Features
+        valence=song.valence,
+        arousal=song.arousal,
+        authenticity=song.authenticity,
+        timeliness=song.timeliness,
+        complexity=song.complexity,
+        bpm=song.bpm,
+        voice=song.voice,
+        female=song.female,
+        danceability=song.danceability,
+        tonal=song.tonal,
+
+        # Genres
+        genres=song.genres,
+
+        # Source IDs
+        track_id=song.track_id,
+        artwork_id=song.artwork_id,
     )
 
     db.add(db_song)
