@@ -1,0 +1,65 @@
+{
+  "_id": "6421a870672791ee89603fc1",
+  "title": "Changes",
+  "album": "Greatest Hits",
+  "artist": "2Pac",
+  "duration_s": 269.4266666666667,
+  "features": {
+    "valence": -0.31120963383333333,
+    "arousal": -0.16774184683333332,
+    "authenticity": -0.14595456377777777,
+    "timeliness": 0.09787122822222222,
+    "complexity": -0.22656261655555557,
+    "bpm": 111.0,
+    "voice": 0.8303901553153992,
+    "female": 0.2620882987976074,
+    "danceability": 0.9198864698410034,
+    "tonal": 0.9605833888053894,
+    "genres": {
+      "all_genres": {
+        "Rock": 0.04822042,
+        "Pop": 0.15332504,
+        "Alternative": 0.02617948,
+        "Indie": 0.02839656,
+        "Electronic": 0.08310284,
+        "Dance": 0.05925497,
+        "Alternative Rock": 0.00660272,
+        "Jazz": 0.01237453,
+        "Metal": 0.00265589,
+        "Chillout": 0.02867878,
+        "Classic Rock": 0.00813777,
+        "Soul": 0.0561738,
+        "Indie Rock": 0.00564525,
+        "Electronica": 0.02105106,
+        "Folk": 0.01584379,
+        "Chill": 0.01744949,
+        "Instrumental": 0.00786927,
+        "Punk": 0.00369138,
+        "Blues": 0.00570253,
+        "Hard Rock": 0.00274988,
+        "Ambient": 0.00867745,
+        "Acoustic": 0.00915827,
+        "Experimental": 0.00639676,
+        "Hip-Hop": 0.42336416,
+        "Country": 0.00789388,
+        "Easy Listening": 0.00610271,
+        "Funk": 0.01734195,
+        "Electro": 0.01567134,
+        "Heavy Metal": 0.00131107,
+        "Progressive Rock": 0.00507135,
+        "RnB": 0.09476675,
+        "Indie Pop": 0.00480386,
+        "House": 0.01016862
+      },
+      "top3_genres": {
+        "Hip-Hop": 0.42336416,
+        "Pop": 0.15332504,
+        "RnB": 0.09476675
+      }
+    }
+  },
+  "ids": {
+    "track_id": "6421a870672791ee89603fc1.mp3",
+    "artwork_id": "2Pac_Greatest Hits.jpg"
+  }
+}

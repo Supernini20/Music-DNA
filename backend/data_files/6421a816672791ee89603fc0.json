@@ -1,0 +1,65 @@
+{
+  "_id": "6421a816672791ee89603fc0",
+  "title": "California Love",
+  "album": "Greatest Hits",
+  "artist": "2Pac",
+  "duration_s": 285.24,
+  "features": {
+    "valence": -0.11110064110526316,
+    "arousal": 0.2665341015263158,
+    "authenticity": 0.049694328263157894,
+    "timeliness": -0.13422914084210527,
+    "complexity": 0.002633941789473685,
+    "bpm": 92.0,
+    "voice": 0.6636008620262146,
+    "female": 0.3123132288455963,
+    "danceability": 0.9823715090751648,
+    "tonal": 0.979560375213623,
+    "genres": {
+      "all_genres": {
+        "Rock": 0.05066877,
+        "Pop": 0.15584005,
+        "Alternative": 0.03083074,
+        "Indie": 0.03691711,
+        "Electronic": 0.06528836,
+        "Dance": 0.04831184,
+        "Alternative Rock": 0.00842244,
+        "Jazz": 0.01157339,
+        "Metal": 0.00189289,
+        "Chillout": 0.02526257,
+        "Classic Rock": 0.00436664,
+        "Soul": 0.06956974,
+        "Indie Rock": 0.00920575,
+        "Electronica": 0.0162605,
+        "Folk": 0.00441471,
+        "Chill": 0.01586449,
+        "Instrumental": 0.00654463,
+        "Punk": 0.00502932,
+        "Blues": 0.00457319,
+        "Hard Rock": 0.00186743,
+        "Ambient": 0.00397407,
+        "Acoustic": 0.00426734,
+        "Experimental": 0.00784198,
+        "Hip-Hop": 0.52037871,
+        "Country": 0.0020865,
+        "Easy Listening": 0.00381806,
+        "Funk": 0.03570803,
+        "Electro": 0.01156248,
+        "Heavy Metal": 0.00067329,
+        "Progressive Rock": 0.00300092,
+        "RnB": 0.11670356,
+        "Indie Pop": 0.00645672,
+        "House": 0.00397283
+      },
+      "top3_genres": {
+        "Hip-Hop": 0.52037871,
+        "Pop": 0.15584005,
+        "RnB": 0.11670356
+      }
+    }
+  },
+  "ids": {
+    "track_id": "6421a816672791ee89603fc0.mp3",
+    "artwork_id": "2Pac_Greatest Hits.jpg"
+  }
+}

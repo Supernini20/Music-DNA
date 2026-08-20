@@ -1,0 +1,65 @@
+{
+  "_id": "6421a70f672791ee89603fbd",
+  "title": "2 Of Amerikaz Most Wanted",
+  "album": "Greatest Hits",
+  "artist": "2Pac",
+  "duration_s": 247.22666666666666,
+  "features": {
+    "valence": -0.4556623747878788,
+    "arousal": -0.04151297957575757,
+    "authenticity": -0.24157685593939393,
+    "timeliness": 0.03357516478787879,
+    "complexity": -0.0023586689696969703,
+    "bpm": 99.0,
+    "voice": 0.6640594601631165,
+    "female": 0.2243775576353073,
+    "danceability": 0.9765257835388184,
+    "tonal": 0.9914020895957947,
+    "genres": {
+      "all_genres": {
+        "Rock": 0.02243687,
+        "Pop": 0.07339526,
+        "Alternative": 0.01527561,
+        "Indie": 0.0130799,
+        "Electronic": 0.07398508,
+        "Dance": 0.05403827,
+        "Alternative Rock": 0.00405736,
+        "Jazz": 0.01956429,
+        "Metal": 0.00184786,
+        "Chillout": 0.03235248,
+        "Classic Rock": 0.00245375,
+        "Soul": 0.07264378,
+        "Indie Rock": 0.00326582,
+        "Electronica": 0.0209542,
+        "Folk": 0.0028354,
+        "Chill": 0.01805816,
+        "Instrumental": 0.00964537,
+        "Punk": 0.00279543,
+        "Blues": 0.00410479,
+        "Hard Rock": 0.00112835,
+        "Ambient": 0.00594242,
+        "Acoustic": 0.00256921,
+        "Experimental": 0.00762272,
+        "Hip-Hop": 0.54467642,
+        "Country": 0.00169302,
+        "Easy Listening": 0.002725,
+        "Funk": 0.05809184,
+        "Electro": 0.01765914,
+        "Heavy Metal": 0.00053568,
+        "Progressive Rock": 0.00173468,
+        "RnB": 0.12138285,
+        "Indie Pop": 0.00170839,
+        "House": 0.00912582
+      },
+      "top3_genres": {
+        "Hip-Hop": 0.54467642,
+        "RnB": 0.12138285,
+        "Electronic": 0.07398508
+      }
+    }
+  },
+  "ids": {
+    "track_id": "6421a70f672791ee89603fbd.mp3",
+    "artwork_id": "2Pac_Greatest Hits.jpg"
+  }
+}
