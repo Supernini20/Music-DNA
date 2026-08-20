@@ -3,7 +3,6 @@ from sqlalchemy.orm import Session
 from .models_song import Song
 from .schemas_song import SongCreate, SongUpdate
 
-
 def create_song(db: Session, song: SongCreate):
     db_song = Song(
         external_id=song.external_id,
@@ -47,7 +46,12 @@ def get_songs(db: Session):
 def get_song(db: Session, song_id: int):
     return db.query(Song).filter(Song.id == song_id).first()
 
+def get_song_by_name(db: Session, song_name: str):
+    return db.query(Song).filter(Song.title == song_name).first()
 
+
+
+"""
 def update_song(db: Session, song_id: int, song: SongUpdate):
     db_song = get_song(db, song_id)
 
@@ -65,6 +69,7 @@ def update_song(db: Session, song_id: int, song: SongUpdate):
     return db_song
 
 
+
 def delete_song(db: Session, song_id: int):
     db_song = get_song(db, song_id)
 
@@ -75,3 +80,4 @@ def delete_song(db: Session, song_id: int):
     db.commit()
 
     return db_song
+"""
