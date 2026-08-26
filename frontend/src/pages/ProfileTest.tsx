@@ -3,7 +3,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 import { PersonalityQuestions } from "../components/profile-test/PersonalityQuestions";
 import { SongSelection } from "../components/profile-test/SongSelection";
-import { SongMeaning } from "../components/profile-test/SongMeaning";
+import { SongRating } from "../components/profile-test/SongRating";
 import { JourneyNavigation } from "../components/JourneyNavigation";
 
 export function ProfileTest() {
@@ -61,7 +61,7 @@ export function ProfileTest() {
 
         <SongSelection />
 
-        <SongMeaning />
+        <SongRating />
 
         <Box
           sx={{
