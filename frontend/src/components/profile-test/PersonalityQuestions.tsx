@@ -1,16 +1,21 @@
-import {
-  Box,
-  Card,
-  FormControl,
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  Slider,
-  Typography,
-} from "@mui/material";
+import { Box, Card, Typography } from "@mui/material";
 import PsychologyIcon from "@mui/icons-material/Psychology";
+import { QuestionCard } from "./QuestionCard";
+import questions from "../../data/questions.json";
+import { useState } from "react";
+
+export type Answer = 1 | 2 | 3 | 4 | 5;
 
 export function PersonalityQuestions() {
+  const [answers, setAnswers] = useState<Record<number, Answer>>({});
+
+  const handleAnswer = (questionIndex: number, value: Answer) => {
+    setAnswers((current) => ({
+      ...current,
+      [questionIndex]: value,
+    }));
+  };
+
   return (
     <Card
       elevation={0}
@@ -42,95 +47,15 @@ export function PersonalityQuestions() {
         </Typography>
       </Box>
 
-      <Box sx={{ mb: 5 }}>
-        <Typography
-          variant="body1"
-          sx={{
-            fontWeight: 600,
-            mb: 2,
-          }}
-        >
-          1. How much do you enjoy trying new things?
-        </Typography>
-
-        <FormControl>
-          <RadioGroup defaultValue="sometimes">
-            <FormControlLabel
-              value="rarely"
-              control={<Radio />}
-              label="I usually prefer what I already know"
-            />
-
-            <FormControlLabel
-              value="sometimes"
-              control={<Radio />}
-              label="It depends on the situation"
-            />
-
-            <FormControlLabel
-              value="often"
-              control={<Radio />}
-              label="I love discovering new things"
-            />
-          </RadioGroup>
-        </FormControl>
-      </Box>
-
-      <Box sx={{ mb: 5 }}>
-        <Typography
-          variant="body1"
-          sx={{
-            fontWeight: 600,
-            mb: 3,
-          }}
-        >
-          2. How strongly do your emotions influence your decisions?
-        </Typography>
-
-        <Slider
-          defaultValue={50}
-          valueLabelDisplay="auto"
-          marks={[
-            { value: 0, label: "Not much" },
-            { value: 50, label: "Sometimes" },
-            { value: 100, label: "Very strongly" },
-          ]}
+      {questions.map((question, index) => (
+        <QuestionCard
+          key={index}
+          question={question}
+          index={index}
+          answer={answers[index]}
+          onAnswer={(value: Answer) => handleAnswer(index, value)}
         />
-      </Box>
-
-      <Box>
-        <Typography
-          variant="body1"
-          sx={{
-            fontWeight: 600,
-            mb: 2,
-          }}
-        >
-          3. Which description feels most like you?
-        </Typography>
-
-        <FormControl>
-          <RadioGroup defaultValue="reflective">
-            <FormControlLabel
-              value="social"
-              control={<Radio />}
-              label="Curious and social"
-            />
-
-            <FormControlLabel
-              value="reflective"
-              control={<Radio />}
-              label="Thoughtful and reflective"
-            />
-
-            <FormControlLabel
-              value="adventurous"
-              control={<Radio />}
-              label="Adventurous and spontaneous"
-            />
-          </RadioGroup>
-        </FormControl>
-      </Box>
+      ))}
     </Card>
   );
 }

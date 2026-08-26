@@ -1,0 +1,212 @@
+[
+  {
+    "de": "Ich bin eher ruhig.",
+    "en": "Tends to be quiet.",
+    "dimension": "E",
+    "polung": "-",
+    "facette": "Geselligkeit"
+  },
+  {
+    "de": "Ich bin einfühlsam, warmherzig.",
+    "en": "Is compassionate, has a soft heart.",
+    "dimension": "V",
+    "polung": "+",
+    "facette": "Mitgefühl"
+  },
+  {
+    "de": "Ich bin eher unordentlich",
+    "en": "Tends to be disorganized.",
+    "dimension": "G",
+    "polung": "-",
+    "facette": "Ordnungsliebe"
+  },
+  {
+    "de": "Ich mache mir oft Sorgen.",
+    "en": "Worries a lot.",
+    "dimension": "N",
+    "polung": "+",
+    "facette": "Ängstlichkeit"
+  },
+  {
+    "de": "Ich kann mich für Kunst, Musik und Literatur begeistern.",
+    "en": "Is fascinated by art, music, or literature.",
+    "dimension": "O",
+    "polung": "+",
+    "facette": "Ästhetisches Empfinden"
+  },
+  {
+    "de": "Ich neige dazu, die Führung zu übernehmen.",
+    "en": "Is dominant, acts as a leader.",
+    "dimension": "E",
+    "polung": "+",
+    "facette": "Durchsetzungsfähigkeit"
+  },
+  {
+    "de": "Ich bin manchmal unhöflich und schroff.",
+    "en": "Is sometimes rude to others.",
+    "dimension": "V",
+    "polung": "-",
+    "facette": "Höflichkeit"
+  },
+  {
+    "de": "Ich neige dazu, Aufgaben vor mir herzuschieben.",
+    "en": "Has difficulty getting started on tasks.",
+    "dimension": "G",
+    "polung": "-",
+    "facette": "Fleiß"
+  },
+  {
+    "de": "Ich bin oft deprimiert, niedergeschlagen.",
+    "en": "Tends to feel depressed, blue.",
+    "dimension": "N",
+    "polung": "+",
+    "facette": "Niedergeschlagenheit"
+  },
+  {
+    "de": "Mich interessieren abstrakte Überlegungen wenig.",
+    "en": "Has little interest in abstract ideas.",
+    "dimension": "O",
+    "polung": "-",
+    "facette": "Intellektuelle Neugierde"
+  },
+  {
+    "de": "Ich bin voller Energie und Tatendrang.",
+    "en": "Is full of energy.",
+    "dimension": "E",
+    "polung": "+",
+    "facette": "Aktivität"
+  },
+  {
+    "de": "Ich schenke anderen leicht Vertrauen, glaube an das Gute im Menschen.",
+    "en": "Assumes the best about people.",
+    "dimension": "V",
+    "polung": "+",
+    "facette": "Vertrauen"
+  },
+  {
+    "de": "Ich bin verlässlich, auf mich kann man zählen.",
+    "en": "Is reliable, can always be counted on.",
+    "dimension": "G",
+    "polung": "+",
+    "facette": "Verlässlichkeit"
+  },
+  {
+    "de": "Ich bin ausgeglichen, nicht leicht aus der Ruhe zu bringen.",
+    "en": "Is emotionally stable, not easily upset.",
+    "dimension": "N",
+    "polung": "-",
+    "facette": "Unbeständigkeit der Gefühle"
+  },
+  {
+    "de": "Ich bin originell, entwickle neue Ideen.",
+    "en": "Is original, comes up with new ideas.",
+    "dimension": "O",
+    "polung": "+",
+    "facette": "Kreativer Einfallsreichtum"
+  },
+  {
+    "de": "Ich gehe aus mir heraus, bin gesellig.",
+    "en": "Is outgoing, sociable.",
+    "dimension": "E",
+    "polung": "+",
+    "facette": "Geselligkeit"
+  },
+  {
+    "de": "Andere sind mir eher gleichgültig, egal.",
+    "en": "Can be cold and uncaring.",
+    "dimension": "V",
+    "polung": "-",
+    "facette": "Mitgefühl"
+  },
+  {
+    "de": "Ich mag es sauber und aufgeräumt.",
+    "en": "Keeps things neat and tidy.",
+    "dimension": "G",
+    "polung": "+",
+    "facette": "Ordnungsliebe"
+  },
+  {
+    "de": "Ich bleibe auch in stressigen Situationen gelassen.",
+    "en": "Is relaxed, handles stress well.",
+    "dimension": "N",
+    "polung": "-",
+    "facette": "Ängstlichkeit"
+  },
+  {
+    "de": "Ich bin nicht sonderlich kunstinteressiert.",
+    "en": "Has few artistic interests.",
+    "dimension": "O",
+    "polung": "-",
+    "facette": "Ästhetisches Empfinden"
+  },
+  {
+    "de": "In einer Gruppe überlasse ich lieber anderen die Entscheidung.",
+    "en": "Prefers to have others take charge.",
+    "dimension": "E",
+    "polung": "-",
+    "facette": "Durchsetzungsfähigkeit"
+  },
+  {
+    "de": "Ich begegne anderen mit Respekt.",
+    "en": "Is respectful, treats others with respect.",
+    "dimension": "V",
+    "polung": "+",
+    "facette": "Höflichkeit"
+  },
+  {
+    "de": "Ich bleibe an einer Aufgabe dran, bis sie erledigt ist.",
+    "en": "Is persistent, works until the task is finished.",
+    "dimension": "G",
+    "polung": "+",
+    "facette": "Fleiß"
+  },
+  {
+    "de": "Ich bin selbstsicher, mit mir zufrieden.",
+    "en": "Feels secure, comfortable with self.",
+    "dimension": "N",
+    "polung": "-",
+    "facette": "Niedergeschlagenehit"
+  },
+  {
+    "de": "Es macht mir Spaß, gründlich über komplexe Dinge nachzudenken und sie zu verstehen.",
+    "en": "Is complex, a deep thinker.",
+    "dimension": "O",
+    "polung": "+",
+    "facette": "Intellektuelle Neugierde"
+  },
+  {
+    "de": "Ich bin weniger aktiv und unternehmungslustig als andere.",
+    "en": "Is less active than other people.",
+    "dimension": "E",
+    "polung": "-",
+    "facette": "Aktivität"
+  },
+  {
+    "de": "Ich neige dazu, andere zu kritisieren.",
+    "en": "Tends to find fault with others.",
+    "dimension": "V",
+    "polung": "-",
+    "facette": "Vertrauen"
+  },
+  {
+    "de": "Ich bin manchmal ziemlich nachlässig.",
+    "en": "Can be somewhat careless.",
+    "dimension": "G",
+    "polung": "-",
+    "facette": "Verlässlichkeit"
+  },
+  {
+    "de": "Ich reagiere schnell gereizt oder genervt.",
+    "en": "Is temperamental, gets emotional easily.",
+    "dimension": "N",
+    "polung": "+",
+    "facette": "Unbeständigkeit der Gefühle"
+  },
+  {
+    "de": "Ich bin nicht besonders einfallsreich.",
+    "en": "Has little creativity.",
+    "dimension": "O",
+    "polung": "-",
+    "facette": "Kreativer Einfallsreichtum"
+  }
+]
