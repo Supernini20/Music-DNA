@@ -1,15 +1,20 @@
-import Button from "@mui/material/Button";
-import MusicNoteIcon from "@mui/icons-material/MusicNote";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
-function App() {
+import { HomePage } from "./pages/HomePage";
+import { ProfileTest } from "./pages/ProfileTest";
+import { ProfileResults } from "./pages/ProfileResults";
+
+export function App() {
   return (
-    <main>
-      <h1>Music Personality</h1>
-      <Button variant="contained" startIcon={<MusicNoteIcon />}>
-        Musikprofil starten
-      </Button>
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/test" element={<ProfileTest />} />
+        <Route path="/profile" element={<ProfileResults />} />
+
+        {/* Redirect unknown routes to the home page */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
