@@ -1,0 +1,102 @@
+{
+  "testId": "test-001",
+  "personality": {
+    "answers": [
+      {
+        "dimension": "E",
+        "polung": "-",
+        "answer": 2
+      },
+      {
+        "dimension": "V",
+        "polung": "+",
+        "answer": 5
+      },
+      {
+        "dimension": "G",
+        "polung": "-",
+        "answer": 2
+      },
+      {
+        "dimension": "N",
+        "polung": "+",
+        "answer": 4
+      },
+      {
+        "dimension": "O",
+        "polung": "+",
+        "answer": 5
+      },
+      {
+        "dimension": "E",
+        "polung": "+",
+        "answer": 4
+      },
+      {
+        "dimension": "V",
+        "polung": "-",
+        "answer": 2
+      },
+      {
+        "dimension": "G",
+        "polung": "-",
+        "answer": 3
+      },
+      {
+        "dimension": "N",
+        "polung": "+",
+        "answer": 4
+      },
+      {
+        "dimension": "O",
+        "polung": "-",
+        "answer": 2
+      },
+      {
+        "dimension": "E",
+        "polung": "+",
+        "answer": 5
+      },
+      {
+        "dimension": "V",
+        "polung": "+",
+        "answer": 4
+      },
+      {
+        "dimension": "G",
+        "polung": "+",
+        "answer": 5
+      },
+      {
+        "dimension": "N",
+        "polung": "-",
+        "answer": 4
+      },
+      {
+        "dimension": "O",
+        "polung": "+",
+        "answer": 5
+      }
+    ]
+  },
+  "music": {
+    "mostListened": "4uLU6hMCjMI75M1A2tKUQC",
+    "currentlyLiked": "0VjIjW4GlUZAMYd2vXMi3b",
+    "identifiesWith": "7qiZfU4dY1lWllzX7mPBI3",
+    "bestDescribesMe": "Mr. Brightside",
+    "ratedSongs": [
+      {
+        "trackId": "1xQ6trAsedVPCdbtDAmk0c",
+        "rating": 2
+      },
+      {
+        "trackId": "2takcwOaAZWiXQijPHIx7B",
+        "rating": 5
+      },
+      {
+        "trackId": "6habFhsOp2NvshLv26DqMb",
+        "rating": 4
+      }
+    ]
+  }
+}
