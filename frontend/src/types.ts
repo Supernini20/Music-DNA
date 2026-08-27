@@ -29,7 +29,7 @@ export type MusicProfile = {
 };
 
 export type MusicProfileRequest = {
-  test: string;
+  a: string;
 };
 
 export type GeneratedImage = {

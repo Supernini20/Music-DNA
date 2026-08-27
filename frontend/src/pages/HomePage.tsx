@@ -2,6 +2,7 @@ import { Box, Button, Card, Container, Typography } from "@mui/material";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { JourneyNavigation } from "../components/JourneyNavigation";
+import { createMusicProfile } from "../api/api";
 
 export function HomePage() {
   return (
@@ -131,6 +132,7 @@ export function HomePage() {
 
             <Button
               variant="contained"
+              onClick={() => createMusicProfile({ a: "stop" })}
               size="large"
               endIcon={<ArrowForwardIcon />}
               sx={{
