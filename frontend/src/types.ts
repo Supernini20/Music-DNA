@@ -28,9 +28,39 @@ export type MusicProfile = {
   test: string;
 };
 
-export type MusicProfileRequest = {
-  a: string;
-};
+type Rating = 1 | 2 | 3 | 4 | 5;
+
+type PersonalityDimension = "E" | "V" | "G" | "N" | "O";
+type Polung = "+" | "-";
+
+interface PersonalityAnswer {
+  dimension: PersonalityDimension;
+  polung: Polung;
+  answer: Rating;
+}
+
+interface Personality {
+  answers: PersonalityAnswer[];
+}
+
+interface RatedSong {
+  trackId: string;
+  rating: Rating;
+}
+
+interface Music {
+  mostListened: string;
+  currentlyLiked: string;
+  identifiesWith: string;
+  bestDescribesMe: string;
+  ratedSongs: RatedSong[];
+}
+
+export interface MusicProfileRequest {
+  testId: string;
+  personality: Personality;
+  music: Music;
+}
 
 export type GeneratedImage = {
   url: string;
