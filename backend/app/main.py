@@ -1,14 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .database import Base, engine
+
+#from database import Base, engine
 from .routers import songs
-from app.routers import ai
+from .routers import ai
+from .routers import profile
 
-from routers import profile
 
-
-Base.metadata.create_all(bind=engine)
+#Base.metadata.create_all(bind=engine)
 
 
 app = FastAPI(

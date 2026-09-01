@@ -1,7 +1,7 @@
 import json
 from statistics import mean, stdev
 
-from models.music_profile import Features, Music, ProfileRequest, Track
+from ..models.music_profile import Features, Music, ProfileRequest, Track
 from fastapi import APIRouter
 from pydantic import BaseModel
 

@@ -8,7 +8,7 @@ load_dotenv(dotenv_path=Path(__file__).with_name(".env"))
 
 client = InferenceClient(
     provider="nscale",
-    api_key=os.environ["HUGGING_FACES_KEY"],
+    api_key=os.environ.get("HUGGING_FACES_KEY", ""),
 )
 
 def generate_image(prompt: str):
