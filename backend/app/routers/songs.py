@@ -27,6 +27,14 @@ def get_songs(
     return crud.get_songs(db)
 
 
+@router.get("/search", response_model=list[str])
+def search_songs(
+    name: str,
+    db: Session = Depends(get_db)
+):
+    return crud.get_songs_by_name(db, name)
+
+
 @router.get("/{song_id}", response_model=SongResponse)
 def get_song(
     song_id: int,
@@ -42,6 +50,7 @@ def get_song(
 
     return song
 
+
 @router.get("/name/{song_name}", response_model=SongResponse)
 def get_song_by_name(
     song_name: str,
@@ -56,45 +65,3 @@ def get_song_by_name(
         )
 
     return song
-
-
-
-"""
-@router.put("/{song_id}", response_model=SongResponse)
-def update_song(
-    song_id: int,
-    song: SongUpdate,
-    db: Session = Depends(get_db)
-):
-    updated_song = crud.update_song(
-        db,
-        song_id,
-        song
-    )
-
-    if not updated_song:
-        raise HTTPException(
-            status_code=404,
-            detail="Song not found"
-        )
-
-    return updated_song
-
-
-@router.delete("/{song_id}")
-def delete_song(
-    song_id: int,
-    db: Session = Depends(get_db)
-):
-    deleted_song = crud.delete_song(db, song_id)
-
-    if not deleted_song:
-        raise HTTPException(
-            status_code=404,
-            detail="Song not found"
-        )
-
-    return {
-        "message": "Song deleted successfully"
-    }
-"""
