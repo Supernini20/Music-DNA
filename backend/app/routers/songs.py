@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from ..database import get_db
-from ..schemas_song import SongCreate, SongResponse, SongUpdate
+from ..schemas_song import SongCreate, SongResponse, SongSearchResponse, SongUpdate
 from .. import crud
 
 
@@ -51,17 +51,20 @@ def get_song(
     return song
 
 
-@router.get("/name/{song_name}", response_model=SongResponse)
+@router.get("/name/{song_name}", response_model=list[SongSearchResponse])
 def get_song_by_name(
     song_name: str,
     db: Session = Depends(get_db)
 ):
-    song = crud.get_song_by_name(db, song_name)
+    songs = crud.get_songs_by_name(db, song_name)
 
-    if not song:
+    if not songs:
         raise HTTPException(
             status_code=404,
-            detail="Song not found"
+            detail="No songs found"
         )
 
-    return song
+    return [
+        {"title": title, "artist": artist}
+        for title, artist in songs
+    ]

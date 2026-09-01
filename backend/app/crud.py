@@ -50,15 +50,12 @@ def get_song_by_name(db: Session, song_name: str):
     return db.query(Song).filter(Song.title == song_name).first()
 
 def get_songs_by_name(db: Session, song_name: str):
-    return [
-        title
-        for (title,) in (
-            db.query(Song.title)
+    return (
+            db.query(Song.title, Song.artist)
             .filter(Song.title.ilike(f"%{song_name}%"))
             .limit(10)
             .all()
-        )
-    ]
+    )
 
 """
 def update_song(db: Session, song_id: int, song: SongUpdate):

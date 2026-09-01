@@ -67,3 +67,7 @@ class SongResponse(SongBase):
 
     class Config:
         from_attributes = True
+
+class SongSearchResponse(BaseModel):
+    title: str
+    artist: str
