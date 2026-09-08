@@ -1,20 +1,35 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+from contextlib import asynccontextmanager
 
 from .database import Base, engine
 from .routers import songs
 from .routers import ai
 from .routers import profile
+from .import_songs import import_songs
 
 
-#Base.metadata.create_all(bind=engine)
+
+Base.metadata.create_all(bind=engine)
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    print("Starte Song-Import...")
+    try:
+        import_songs()
+    except Exception as e:
+        print(f"Fehler beim Song-Import: {e}")
+    yield
+    # Shutdown (aktuell nichts zu tun)
 
 
 app = FastAPI(
     title="Music-DNA API",
     description="Backend für die Music-DNA Anwendung",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
 app.add_middleware(

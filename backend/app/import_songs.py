@@ -7,7 +7,7 @@ from .database import SessionLocal
 from .models_song import Song
 
 
-DATA_DIR = Path("data_files")
+DATA_DIR = Path(__file__).resolve().parent.parent / "data_files_very_small"
 print("Existiert:", DATA_DIR.exists())
 
 def import_songs():
@@ -59,6 +59,7 @@ def import_songs():
                 track_id=ids.get("track_id"),
                 artwork_id=ids.get("artwork_id"),
             )
+            print("SONG------------")
 
             db.add(song)
             print(f"  ✓ {data['title']}")
