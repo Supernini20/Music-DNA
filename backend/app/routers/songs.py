@@ -65,6 +65,6 @@ def get_song_by_name(
         )
 
     return [
-        {"title": title, "artist": artist}
-        for title, artist in songs
+        {"id": id, "title": title, "artist": artist}
+        for id, title, artist in songs
     ]

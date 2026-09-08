@@ -3,11 +3,11 @@
 export interface Song {
   id: string;
   title: string;
-  album: string;
+  album?: string;
   artist: string;
-  duration_s: number;
+  duration_s?: number;
 
-  features: SongFeatures;
+  features?: SongFeatures;
 }
 
 export interface SongFeatures {

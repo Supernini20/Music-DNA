@@ -69,5 +69,6 @@ class SongResponse(SongBase):
         from_attributes = True
 
 class SongSearchResponse(BaseModel):
+    id: int
     title: str
     artist: str

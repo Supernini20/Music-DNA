@@ -5,6 +5,7 @@ import { PersonalityQuestions } from "../components/profile-test/PersonalityQues
 import { SongSelection } from "../components/profile-test/SongSelection";
 import { SongRating } from "../components/profile-test/SongRating";
 import { JourneyNavigation } from "../components/JourneyNavigation";
+import { searchSongs } from "../api/api";
 
 export function ProfileTest() {
   return (
@@ -82,6 +83,7 @@ export function ProfileTest() {
               textTransform: "none",
               fontWeight: 600,
             }}
+            onClick={() => searchSongs("The")}
           >
             Finish test
           </Button>

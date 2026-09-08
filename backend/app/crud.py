@@ -51,7 +51,7 @@ def get_song_by_name(db: Session, song_name: str):
 
 def get_songs_by_name(db: Session, song_name: str):
     return (
-            db.query(Song.title, Song.artist)
+            db.query(Song.id, Song.title, Song.artist)
             .filter(Song.title.ilike(f"%{song_name}%"))
             .limit(10)
             .all()

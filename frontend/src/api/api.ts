@@ -4,7 +4,9 @@ import { apiRequest } from "./client";
 import type { Song, MusicProfileRequest, MusicProfile } from "../types";
 
 export function searchSongs(query: string): Promise<Song[]> {
-  return apiRequest<Song[]>(`/songs/search?q=${encodeURIComponent(query)}`);
+  const result = apiRequest<Song[]>(`/songs/name/${encodeURIComponent(query)}`);
+  console.log(result);
+  return result;
 }
 
 export function getSong(id: string): Promise<Song> {
