@@ -1,16 +1,18 @@
 // Requests to Backend
 import { apiRequest } from "./client";
 
-import type { Song, MusicProfileRequest, MusicProfile } from "../types";
+import type { Track, MusicProfileRequest, MusicProfile } from "../types";
 
-export function searchSongs(query: string): Promise<Song[]> {
-  const result = apiRequest<Song[]>(`/songs/name/${encodeURIComponent(query)}`);
+export function searchSongs(query: string): Promise<Track[]> {
+  const result = apiRequest<Track[]>(
+    `/songs/name/${encodeURIComponent(query)}`,
+  );
   console.log(result);
   return result;
 }
 
-export function getSong(id: string): Promise<Song> {
-  return apiRequest<Song>(`/songs/${encodeURIComponent(id)}`);
+export function getSong(id: string): Promise<Track> {
+  return apiRequest<Track>(`/songs/${encodeURIComponent(id)}`);
 }
 
 export function createMusicProfile(

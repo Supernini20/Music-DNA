@@ -80,23 +80,15 @@
     ]
   },
   "music": {
-    "mostListened": "4uLU6hMCjMI75M1A2tKUQC",
-    "currentlyLiked": "0VjIjW4GlUZAMYd2vXMi3b",
-    "identifiesWith": "7qiZfU4dY1lWllzX7mPBI3",
-    "bestDescribesMe": "Mr. Brightside",
+    "favoriteSongs": ["1", "4", "7"],
+    "identifiesWith": "alternative rock",
     "ratedSongs": [
-      {
-        "trackId": "1xQ6trAsedVPCdbtDAmk0c",
-        "rating": 2
-      },
-      {
-        "trackId": "2takcwOaAZWiXQijPHIx7B",
-        "rating": 5
-      },
-      {
-        "trackId": "6habFhsOp2NvshLv26DqMb",
-        "rating": 4
-      }
+      { "trackId": "2", "rating": 2 },
+      { "trackId": "5", "rating": 5 },
+      { "trackId": "9", "rating": 4 },
+      { "trackId": "13", "rating": 3 },
+      { "trackId": "16", "rating": 5 },
+      { "trackId": "20", "rating": 1 }
     ]
   }
 }

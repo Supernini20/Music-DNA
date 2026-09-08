@@ -1,6 +1,5 @@
 from typing import Literal
-
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, ConfigDict
 
 
 Rating = Literal[1, 2, 3, 4, 5]
@@ -24,10 +23,8 @@ class RatedSong(BaseModel):
 
 
 class Music(BaseModel):
-    mostListened: str
-    currentlyLiked: str
+    favoriteSongs: list[str]
     identifiesWith: str
-    bestDescribesMe: str
     ratedSongs: list[RatedSong]
 
 
@@ -36,7 +33,6 @@ class ProfileRequest(BaseModel):
     personality: Personality
     music: Music
 
-from pydantic import BaseModel, Field, ConfigDict
 
 
 class Genres(BaseModel):
@@ -73,3 +69,4 @@ class Track(BaseModel):
     duration_s: float
     features: Features
     ids: IDs
+

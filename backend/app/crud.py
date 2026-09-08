@@ -46,6 +46,9 @@ def get_songs(db: Session):
 def get_song(db: Session, song_id: int):
     return db.query(Song).filter(Song.id == song_id).first()
 
+def get_songs_by_id(db: Session, song_ids: list[int]):
+    return db.query(Song).filter(Song.id.in_(song_ids)).all()
+
 def get_song_by_name(db: Session, song_name: str):
     return db.query(Song).filter(Song.title == song_name).first()
 
