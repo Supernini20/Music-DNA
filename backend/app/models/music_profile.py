@@ -70,3 +70,43 @@ class Track(BaseModel):
     features: Features
     ids: IDs
 
+# ============================================================
+# Profile
+# ============================================================
+
+class FeatureStatistics(BaseModel):
+    mean: float
+    std: float
+
+
+class BPMStatistics(BaseModel):
+    mean: float
+    std: float
+    min: float
+    max: float
+
+
+class MusicEvaluation(BaseModel):
+    features: dict[str, FeatureStatistics]
+    bpm: BPMStatistics
+    genres: Genres
+
+
+class MusicProfile(BaseModel):
+    identifiesWith: str
+    favorites: MusicEvaluation
+    rated: MusicEvaluation
+
+
+class PersonalityProfile(BaseModel):
+    # Hier später deine Big-Five-Auswertung
+    openness: float
+    conscientiousness: float
+    extraversion: float
+    agreeableness: float
+    neuroticism: float
+
+
+class Profile(BaseModel):
+    personality: PersonalityProfile
+    music: MusicProfile
