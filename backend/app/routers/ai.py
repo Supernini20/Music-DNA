@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 
 from services.image_generator import generate_image
+from services.music_generator import generate_music, save_audio
 
 
 router = APIRouter(
@@ -32,10 +33,10 @@ def generate(request: ImageRequest):
 
 @router.post("/generate-audio")
 def generate_audio(request: AudioRequest):
-    audio = generate_audio(request.prompt)
+    audio_array, sampling_rate = generate_music(request.prompt)
 
-    audio_path = "generated/generated.mp3"
-    audio.save(audio_path)
+    audio_path = "generated/generated.wav"
+    save_audio(audio_array, sampling_rate, audio_path)
 
     return {
         "message": "Audio generated successfully",

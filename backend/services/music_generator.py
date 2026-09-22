@@ -1,21 +1,22 @@
 import os
-from dotenv import load_dotenv
-from pathlib import Path
-from huggingface_hub import InferenceClient
+import scipy.io.wavfile
+from transformers import AutoProcessor, MusicgenForConditionalGeneration
 
-# Sucht .env relativ zu dieser Datei, unabhängig vom Arbeitsverzeichnis
-load_dotenv(dotenv_path=Path(__file__).with_name(".env"))
-
-client = InferenceClient(
-    provider="fal-ai",
-    api_key=os.environ.get("HUGGING_FACES_KEY", ""),
-)
+processor = AutoProcessor.from_pretrained("facebook/musicgen-small")
+model = MusicgenForConditionalGeneration.from_pretrained("facebook/musicgen-small")
 
 
-def generate_music(prompt: str):
-    audio = client.text_to_audio(
-        prompt,
-        model="stabilityai/stable-audio-3-medium",
+def generate_music(prompt: str, duration_tokens: int = 512):
+    inputs = processor(
+        text=[prompt], 
+        padding=True, 
+        return_tensors="pt"
     )
+    audio_values = model.generate(**inputs, max_new_tokens=duration_tokens)
+    sampling_rate = model.config.audio_encoder.sampling_rate
 
-    return audio
+    return audio_values[0, 0].numpy(), sampling_rate
+
+def save_audio(audio_array, sampling_rate, filename: str):
+    os.makedirs(os.path.dirname(filename), exist_ok=True)
+    scipy.io.wavfile.write(filename, rate=sampling_rate, data=audio_array)
