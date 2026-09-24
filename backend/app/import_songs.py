@@ -8,7 +8,7 @@ from .models_song import Song
 
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data_files_very_small"
-print("Existiert:", DATA_DIR.exists())
+#print("Existiert:", DATA_DIR.exists())
 
 def import_songs():
 
@@ -16,8 +16,7 @@ def import_songs():
 
     try:
         for file in DATA_DIR.glob("*.json"):
-            print("start")
-            print(f"Importiere: {file.name}")
+            #print(f"Importiere: {file.name}")
 
             with open(file, "r", encoding="utf-8") as f:
                 data = json.load(f)
@@ -33,7 +32,7 @@ def import_songs():
             )
 
             if existing_song:
-                print(f"  Überspringe: {data['title']} (bereits vorhanden)")
+                #print(f"  Überspringe: {data['title']} (bereits vorhanden)")
                 continue
 
             song = Song(
@@ -59,11 +58,11 @@ def import_songs():
                 track_id=ids.get("track_id"),
                 artwork_id=ids.get("artwork_id"),
             )
-            print("SONG------------")
+            #print("SONG------------")
 
             db.add(song)
-            print(f"  ✓ {data['title']}")
-
+            #print(f"  ✓ {data['title']}")
+        print("-----Song import done-----")
         db.commit()
 
     except Exception:
