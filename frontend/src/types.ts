@@ -1,5 +1,7 @@
 export type MusicProfile = {
-  test: string;
+  testId: string;
+  personality: Record<string, number>;
+  request?: MusicProfileRequest;
 };
 
 type Rating = 1 | 2 | 3 | 4 | 5;

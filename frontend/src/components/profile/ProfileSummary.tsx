@@ -1,7 +1,11 @@
 import { Box, Card, Typography } from "@mui/material";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 
-export function ProfileSummary() {
+type ProfileSummaryProps = {
+  personality?: Record<string, number>;
+};
+
+export function ProfileSummary({ personality = {} }: ProfileSummaryProps) {
   return (
     <Card
       elevation={0}
@@ -65,7 +69,7 @@ export function ProfileSummary() {
               fontWeight: 600,
             }}
           >
-            Warm
+            {personality.E ?? "-"}
           </Typography>
 
           <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
@@ -95,7 +99,7 @@ export function ProfileSummary() {
               fontWeight: 600,
             }}
           >
-            Balanced
+            {personality.V ?? "-"}
           </Typography>
 
           <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
@@ -125,7 +129,7 @@ export function ProfileSummary() {
               fontWeight: 600,
             }}
           >
-            Rich
+            {personality.O ?? "-"}
           </Typography>
 
           <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>

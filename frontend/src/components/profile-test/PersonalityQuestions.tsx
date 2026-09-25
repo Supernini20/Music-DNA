@@ -36,7 +36,7 @@ export function PersonalityQuestions({
     if (!currentAnswer) return;
 
     if (isLastQuestion) {
-      onComplete?.(answers);
+      onComplete?.({ ...answers, [currentQuestion]: currentAnswer });
       return;
     }
 

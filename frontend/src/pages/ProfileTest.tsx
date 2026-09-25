@@ -1,4 +1,5 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import { useState } from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 import { PersonalityQuestions } from "../components/profile-test/PersonalityQuestions";
@@ -6,13 +7,52 @@ import { SongSelection } from "../components/profile-test/SongSelection";
 import { SongRating } from "../components/profile-test/SongRating";
 import { createMusicProfile } from "../api/api";
 
-import testData from "../data/testData.json";
 import type { MusicProfileRequest } from "../types";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import type { Answer } from "../components/profile-test/PersonalityQuestions";
+import type { Song } from "../components/profile-test/SongSelection";
+import type { SongRatingValue } from "../components/profile-test/SongRating";
+import questions from "../data/questions.json";
 
 export function ProfileTest() {
-  const handleFinishTest = () => {
-    createMusicProfile(testData as MusicProfileRequest);
+  const navigate = useNavigate();
+  const [personalityAnswers, setPersonalityAnswers] = useState<
+    Record<number, Answer>
+  >({});
+  const [favoriteSongs, setFavoriteSongs] = useState<Song[]>([]);
+  const [ratedSongs, setRatedSongs] = useState<SongRatingValue[]>([]);
+  const [identifiesWith, setIdentifiesWith] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const isTestComplete =
+    Object.keys(personalityAnswers).length === questions.length &&
+    favoriteSongs.length === 3 &&
+    identifiesWith.trim().length > 0 &&
+    ratedSongs.length === 3;
+
+  const handleFinishTest = async () => {
+    const request: MusicProfileRequest = {
+      testId: crypto.randomUUID(),
+      personality: {
+        answers: questions.map((question, index) => ({
+          dimension: question.dimension as "E" | "V" | "G" | "N" | "O",
+          polung: question.polung as "+" | "-",
+          answer: personalityAnswers[index],
+        })),
+      },
+      music: {
+        favoriteSongs: favoriteSongs.map((song) => song.id),
+        identifiesWith: identifiesWith.trim(),
+        ratedSongs,
+      },
+    };
+
+    setIsSubmitting(true);
+    try {
+      await createMusicProfile(request);
+      navigate(`/profile/${request.testId}`);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   return (
     <Box
@@ -66,15 +106,24 @@ export function ProfileTest() {
 
         <PersonalityQuestions
           onComplete={(personalityAnswers) => {
-            console.log("Personality:", personalityAnswers);
-
-            // Update state here
+            setPersonalityAnswers(personalityAnswers);
           }}
         />
 
-        <SongSelection />
+        <SongSelection onChange={setFavoriteSongs} />
 
-        <SongRating />
+        <Box sx={{ mb: 4 }}>
+          <TextField
+            fullWidth
+            label="A song that describes you"
+            value={identifiesWith}
+            onChange={(event) => setIdentifiesWith(event.target.value)}
+            placeholder="Enter a song title"
+            helperText="Choose a song title you identify with."
+          />
+        </Box>
+
+        <SongRating onChange={setRatedSongs} />
 
         <Box
           sx={{
@@ -95,12 +144,10 @@ export function ProfileTest() {
               textTransform: "none",
               fontWeight: 600,
             }}
-            //onClick={() => searchSongs("The")}
             onClick={handleFinishTest}
-            component={Link}
-            to="/profile"
+            disabled={isSubmitting || !isTestComplete}
           >
-            Finish test
+            {isSubmitting ? "Saving..." : "Finish test"}
           </Button>
         </Box>
       </Container>

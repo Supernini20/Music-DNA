@@ -10,7 +10,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/test" element={<ProfileTest />} />
-        <Route path="/profile" element={<ProfileResults />} />
+        <Route path="/profile/:testId" element={<ProfileResults />} />
 
         {/* Redirect unknown routes to the home page */}
         <Route path="*" element={<Navigate to="/" replace />} />
