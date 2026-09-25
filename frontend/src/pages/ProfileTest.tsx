@@ -1,6 +1,14 @@
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  Container,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import TitleIcon from "@mui/icons-material/Title";
 
 import { PersonalityQuestions } from "../components/profile-test/PersonalityQuestions";
 import { SongSelection } from "../components/profile-test/SongSelection";
@@ -111,17 +119,41 @@ export function ProfileTest() {
         />
 
         <SongSelection onChange={setFavoriteSongs} />
+        <Card
+          elevation={0}
+          sx={{
+            mb: 6,
+            p: { xs: 3, sm: 4 },
+            borderRadius: 4,
+            border: "1px solid",
+            borderColor: "divider",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+              mb: 3,
+            }}
+          >
+            <TitleIcon color="primary" />
 
-        <Box sx={{ mb: 4 }}>
-          <TextField
-            fullWidth
-            label="A song that describes you"
-            value={identifiesWith}
-            onChange={(event) => setIdentifiesWith(event.target.value)}
-            placeholder="Enter a song title"
-            helperText="Choose a song title you identify with."
-          />
-        </Box>
+            <Typography variant="h5" sx={{ fontWeight: 600 }}>
+              Music title you identify with
+            </Typography>
+          </Box>
+          <Box sx={{ mb: 4 }}>
+            <TextField
+              fullWidth
+              label="A song that describes you"
+              value={identifiesWith}
+              onChange={(event) => setIdentifiesWith(event.target.value)}
+              placeholder="Enter a song title"
+              helperText="Choose a song title you identify with."
+            />
+          </Box>
+        </Card>
 
         <SongRating onChange={setRatedSongs} />
 
