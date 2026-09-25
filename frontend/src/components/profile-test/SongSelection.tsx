@@ -9,73 +9,49 @@ import {
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
+import { searchSongs } from "../../api/api";
+import type { Track } from "../../types";
 
-interface Song {
+export interface Song {
   id: string;
   title: string;
   artist: string;
 }
 
-// Temporäre Fake-Daten.
-// Später können diese Daten durch eine Backend-Suche ersetzt werden.
-const availableSongs: Song[] = [
-  {
-    id: "1",
-    title: "Everything In Its Right Place",
-    artist: "Radiohead",
-  },
-  {
-    id: "2",
-    title: "Midnight City",
-    artist: "M83",
-  },
-  {
-    id: "3",
-    title: "Teardrop",
-    artist: "Massive Attack",
-  },
-  {
-    id: "4",
-    title: "Intro",
-    artist: "The xx",
-  },
-  {
-    id: "5",
-    title: "Roads",
-    artist: "Portishead",
-  },
-  {
-    id: "6",
-    title: "No Surprises",
-    artist: "Radiohead",
-  },
-  {
-    id: "7",
-    title: "Kids",
-    artist: "MGMT",
-  },
-  {
-    id: "8",
-    title: "Sweet Disposition",
-    artist: "The Temper Trap",
-  },
-  {
-    id: "9",
-    title: "505",
-    artist: "Arctic Monkeys",
-  },
-  {
-    id: "10",
-    title: "Space Song",
-    artist: "Beach House",
-  },
-];
+type SongSelectionProps = {
+  onChange?: (songs: Song[]) => void;
+};
 
-export function SongSelection() {
-  const [selectedSongs, setSelectedSongs] = useState<Song[]>([
-    availableSongs[0],
-    availableSongs[1],
-  ]);
+export function SongSelection({ onChange }: SongSelectionProps) {
+  const [selectedSongs, setSelectedSongs] = useState<Song[]>([]);
+  const [options, setOptions] = useState<Song[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  const updateSelectedSongs = (songs: Song[]) => {
+    setSelectedSongs(songs);
+    onChange?.(songs);
+  };
+
+  const handleSearch = async (query: string) => {
+    if (query.trim().length < 2) {
+      setOptions([]);
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const tracks = await searchSongs(query.trim());
+      setOptions(
+        tracks.map((track: Track) => ({
+          id: String(track.id),
+          title: track.title,
+          artist: track.artist,
+        })),
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSongSelect = (
     _: React.SyntheticEvent,
@@ -93,14 +69,14 @@ export function SongSelection() {
       return;
     }
 
-    setSelectedSongs((current) => [...current, song]);
+    updateSelectedSongs([...selectedSongs, song]);
   };
 
   const handleSongRemove = (songId: string): void => {
-    setSelectedSongs((current) => current.filter((song) => song.id !== songId));
+    updateSelectedSongs(selectedSongs.filter((song) => song.id !== songId));
   };
 
-  const remainingSongs = availableSongs.filter(
+  const remainingSongs = options.filter(
     (song) => !selectedSongs.some((selected) => selected.id === song.id),
   );
 
@@ -147,6 +123,8 @@ export function SongSelection() {
         getOptionLabel={(song: Song) => `${song.title} — ${song.artist}`}
         isOptionEqualToValue={(option, value) => option.id === value.id}
         noOptionsText="No songs found"
+        loading={loading}
+        onInputChange={(_, value) => void handleSearch(value)}
         renderOption={(props, song) => (
           <Box
             component="li"

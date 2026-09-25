@@ -23,3 +23,9 @@ export function createMusicProfile(
     body: JSON.stringify(data),
   });
 }
+
+export function getMusicProfile(testId: string): Promise<MusicProfile> {
+  return apiRequest<MusicProfile>(
+    `/music-profile/${encodeURIComponent(testId)}`,
+  );
+}

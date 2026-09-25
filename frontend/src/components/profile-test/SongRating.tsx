@@ -1,5 +1,6 @@
 import { Box, Card, Divider, Rating, Typography } from "@mui/material";
 import GraphicEqIcon from "@mui/icons-material/GraphicEq";
+import { useState } from "react";
 
 interface RatingSong {
   trackId: string;
@@ -7,6 +8,15 @@ interface RatingSong {
   artist: string;
   previewUrl: string;
 }
+
+export type SongRatingValue = {
+  trackId: string;
+  rating: 1 | 2 | 3 | 4 | 5;
+};
+
+type SongRatingProps = {
+  onChange?: (ratings: SongRatingValue[]) => void;
+};
 
 const songsToRate: RatingSong[] = [
   {
@@ -29,7 +39,26 @@ const songsToRate: RatingSong[] = [
   },
 ];
 
-export function SongRating() {
+export function SongRating({ onChange }: SongRatingProps) {
+  const [ratings, setRatings] = useState<
+    Record<string, SongRatingValue["rating"]>
+  >({});
+
+  const handleRating = (trackId: string, value: number | null) => {
+    if (!value) return;
+    const nextRatings = {
+      ...ratings,
+      [trackId]: value as SongRatingValue["rating"],
+    };
+    setRatings(nextRatings);
+    onChange?.(
+      Object.entries(nextRatings).map(([id, rating]) => ({
+        trackId: id,
+        rating,
+      })),
+    );
+  };
+
   return (
     <Card
       elevation={0}
@@ -68,7 +97,11 @@ export function SongRating() {
       <Box>
         {songsToRate.map((song, index) => (
           <Box key={song.trackId}>
-            <SongRatingItem song={song} />
+            <SongRatingItem
+              song={song}
+              rating={ratings[song.trackId]}
+              onRatingChange={handleRating}
+            />
 
             {index < songsToRate.length - 1 && <Divider sx={{ my: 4 }} />}
           </Box>
@@ -80,9 +113,11 @@ export function SongRating() {
 
 interface SongRatingItemProps {
   song: RatingSong;
+  rating?: SongRatingValue["rating"];
+  onRatingChange: (trackId: string, value: number | null) => void;
 }
 
-function SongRatingItem({ song }: SongRatingItemProps) {
+function SongRatingItem({ song, rating, onRatingChange }: SongRatingItemProps) {
   return (
     <Box>
       <Typography
@@ -124,10 +159,11 @@ function SongRatingItem({ song }: SongRatingItemProps) {
 
         <Rating
           name={`rating-${song.trackId}`}
-          defaultValue={0}
+          value={rating ?? null}
           max={5}
           size="large"
           precision={1}
+          onChange={(_, value) => onRatingChange(song.trackId, value)}
         />
 
         <Typography variant="caption" color="text.secondary">
