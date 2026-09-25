@@ -1,10 +1,7 @@
 import { Box, Button, Card, Container, Typography } from "@mui/material";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import { JourneyNavigation } from "../components/JourneyNavigation";
-import { createMusicProfile } from "../api/api";
-import testData from "../data/testData.json";
-import type { MusicProfileRequest } from "../types";
+import { Link } from "react-router-dom";
 
 export function HomePage() {
   return (
@@ -134,9 +131,8 @@ export function HomePage() {
 
             <Button
               variant="contained"
-              onClick={() =>
-                createMusicProfile(testData as MusicProfileRequest)
-              }
+              component={Link}
+              to="/test"
               size="large"
               endIcon={<ArrowForwardIcon />}
               sx={{
@@ -152,7 +148,6 @@ export function HomePage() {
             </Button>
           </Box>
         </Box>
-        <JourneyNavigation currentStep="home" />
       </Container>
     </Box>
   );

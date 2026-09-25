@@ -4,10 +4,16 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { PersonalityQuestions } from "../components/profile-test/PersonalityQuestions";
 import { SongSelection } from "../components/profile-test/SongSelection";
 import { SongRating } from "../components/profile-test/SongRating";
-import { JourneyNavigation } from "../components/JourneyNavigation";
-import { searchSongs } from "../api/api";
+import { createMusicProfile } from "../api/api";
+
+import testData from "../data/testData.json";
+import type { MusicProfileRequest } from "../types";
+import { Link } from "react-router-dom";
 
 export function ProfileTest() {
+  const handleFinishTest = () => {
+    createMusicProfile(testData as MusicProfileRequest);
+  };
   return (
     <Box
       sx={{
@@ -58,7 +64,13 @@ export function ProfileTest() {
           </Typography>
         </Box>
 
-        <PersonalityQuestions />
+        <PersonalityQuestions
+          onComplete={(personalityAnswers) => {
+            console.log("Personality:", personalityAnswers);
+
+            // Update state here
+          }}
+        />
 
         <SongSelection />
 
@@ -83,12 +95,14 @@ export function ProfileTest() {
               textTransform: "none",
               fontWeight: 600,
             }}
-            onClick={() => searchSongs("The")}
+            //onClick={() => searchSongs("The")}
+            onClick={handleFinishTest}
+            component={Link}
+            to="/profile"
           >
             Finish test
           </Button>
         </Box>
-        <JourneyNavigation currentStep="test" />
       </Container>
     </Box>
   );
