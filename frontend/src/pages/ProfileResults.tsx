@@ -13,6 +13,7 @@ import { GeneratedSound } from "../components/profile/GeneratedSound";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { Link, useParams } from "react-router-dom";
 import { getMusicProfile } from "../api/api";
+import { API_URL } from "../api/client";
 import type { MusicProfile } from "../types";
 
 export function ProfileResults() {
@@ -30,6 +31,13 @@ export function ProfileResults() {
   if (error) return <Typography sx={{ p: 4 }}>{error}</Typography>;
   if (!profile) return <CircularProgress sx={{ display: "block", m: 8 }} />;
 
+  const imageUrl = profile.imageUrl
+    ? new URL(profile.imageUrl, API_URL).toString()
+    : undefined;
+  const audioUrl = profile.audioUrl
+    ? new URL(profile.audioUrl, API_URL).toString()
+    : undefined;
+
   return (
     <Box className="profile-results">
       <Container maxWidth="md">
@@ -38,8 +46,8 @@ export function ProfileResults() {
         <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
           Test ID: {profile.testId}
         </Typography>
-        <GeneratedSound />
-        <GeneratedImage />
+        <GeneratedSound audioUrl={audioUrl} />
+        <GeneratedImage imageUrl={imageUrl} />
         <Box
           sx={{
             display: "flex",

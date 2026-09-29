@@ -1,7 +1,11 @@
 import { Box, Card, Typography } from "@mui/material";
 import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
 
-export function GeneratedImage() {
+type GeneratedImageProps = {
+  imageUrl?: string;
+};
+
+export function GeneratedImage({ imageUrl }: GeneratedImageProps) {
   return (
     <Card
       elevation={0}
@@ -49,9 +53,25 @@ export function GeneratedImage() {
           }}
         />
 
-        <Typography variant="h5" sx={{ fontWeight: 600 }}>
-          Your generated image
-        </Typography>
+        {imageUrl ? (
+          <Box
+            component="img"
+            src={imageUrl}
+            alt="Visual interpretation of your musical personality"
+            sx={{
+              display: "block",
+              width: "100%",
+              maxWidth: 640,
+              maxHeight: 520,
+              objectFit: "contain",
+              borderRadius: 2,
+            }}
+          />
+        ) : (
+          <Typography variant="h5" sx={{ fontWeight: 600 }}>
+            Your generated image is not available yet
+          </Typography>
+        )}
 
         <Typography
           variant="body2"

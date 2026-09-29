@@ -1,8 +1,11 @@
-import { Box, Card, IconButton, Typography } from "@mui/material";
+import { Box, Card, Typography } from "@mui/material";
 import GraphicEqIcon from "@mui/icons-material/GraphicEq";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 
-export function GeneratedSound() {
+type GeneratedSoundProps = {
+  audioUrl?: string;
+};
+
+export function GeneratedSound({ audioUrl }: GeneratedSoundProps) {
   return (
     <Card
       elevation={0}
@@ -39,19 +42,22 @@ export function GeneratedSound() {
           backgroundColor: "action.hover",
         }}
       >
-        <IconButton
-          color="primary"
-          sx={{
-            width: 52,
-            height: 52,
-            backgroundColor: "background.paper",
-            "&:hover": {
-              backgroundColor: "background.paper",
-            },
-          }}
-        >
-          <PlayArrowIcon />
-        </IconButton>
+        {audioUrl ? (
+          <Box
+            component="audio"
+            controls
+            src={audioUrl}
+            aria-label="Play your generated musical identity"
+            sx={{
+              width: "100%",
+              maxWidth: 420,
+            }}
+          />
+        ) : (
+          <Typography color="text.secondary">
+            Your generated sound is not available yet
+          </Typography>
+        )}
 
         <Box sx={{ flex: 1 }}>
           <Typography variant="body1" sx={{ fontWeight: 600 }}>
