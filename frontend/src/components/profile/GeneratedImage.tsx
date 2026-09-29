@@ -1,11 +1,13 @@
 import { Box, Card, Typography } from "@mui/material";
-import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import ImageIcon from "@mui/icons-material/Image";
 
 type GeneratedImageProps = {
   imageUrl?: string;
+  status?: "pending" | "ready" | "failed";
 };
 
-export function GeneratedImage({ imageUrl }: GeneratedImageProps) {
+export function GeneratedImage({ imageUrl, status }: GeneratedImageProps) {
   return (
     <Card
       elevation={0}
@@ -25,7 +27,7 @@ export function GeneratedImage({ imageUrl }: GeneratedImageProps) {
           mb: 3,
         }}
       >
-        <AutoAwesomeIcon color="primary" />
+        <ImageIcon color="primary" />
 
         <Typography variant="h5" sx={{ fontWeight: 600 }}>
           Your visual personality
@@ -45,14 +47,6 @@ export function GeneratedImage({ imageUrl }: GeneratedImageProps) {
           background: "linear-gradient(145deg, #e8e3ff 0%, #dceeff 100%)",
         }}
       >
-        <AutoAwesomeIcon
-          sx={{
-            fontSize: 48,
-            color: "primary.main",
-            mb: 2,
-          }}
-        />
-
         {imageUrl ? (
           <Box
             component="img"
@@ -68,9 +62,20 @@ export function GeneratedImage({ imageUrl }: GeneratedImageProps) {
             }}
           />
         ) : (
-          <Typography variant="h5" sx={{ fontWeight: 600 }}>
-            Your generated image is not available yet
-          </Typography>
+          <>
+            <AddPhotoAlternateIcon
+              sx={{
+                fontSize: 48,
+                color: "primary.main",
+                mb: 2,
+              }}
+            />
+            <Typography variant="h5" sx={{ fontWeight: 600 }}>
+              {status === "failed"
+                ? "Your generated image could not be created"
+                : "Your generated image is not available yet"}
+            </Typography>
+          </>
         )}
 
         <Typography

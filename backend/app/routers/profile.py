@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor
 
 from services.music_generator import save_audio, generate_music
 from services.image_generator import generate_image
@@ -20,8 +21,35 @@ router = APIRouter(
     tags=["Music Profile"],
 )
 
-profiles: dict[str, dict] = {}
+profiles: dict[str, dict] = {"test-id": {}}
 GENERATED_DIR = Path(__file__).resolve().parents[2] / "generated"
+generation_pool = ThreadPoolExecutor(max_workers=2)
+
+
+def generate_profile_image(test_id: str, prompt: str):
+    try:
+        image = generate_image(prompt)
+        image.save(GENERATED_DIR / f"{test_id}.png")
+        profiles[test_id]["imageUrl"] = f"/generated/{test_id}.png"
+        profiles[test_id]["imageStatus"] = "ready"
+    except Exception as error:
+        profiles[test_id]["imageStatus"] = "failed"
+        print(f"Image generation failed for {test_id}: {error}")
+
+
+def generate_profile_audio(test_id: str, prompt: str):
+    try:
+        audio_array, sampling_rate = generate_music(prompt)
+        save_audio(
+            audio_array,
+            sampling_rate,
+            str(GENERATED_DIR / f"{test_id}.wav"),
+        )
+        profiles[test_id]["audioUrl"] = f"/generated/{test_id}.wav"
+        profiles[test_id]["audioStatus"] = "ready"
+    except Exception as error:
+        profiles[test_id]["audioStatus"] = "failed"
+        print(f"Audio generation failed for {test_id}: {error}")
 
 
 @router.post("/generate")
@@ -34,24 +62,18 @@ def generate(
         "testId": request.testId,
         "personality": personality_values,
         "request": request.model_dump(),
-        "imageUrl": f"/generated/{request.testId}.png",
-        "audioUrl": f"/generated/{request.testId}.wav",
+        "imageUrl": None,
+        "audioUrl": None,
+        "imageStatus": "pending",
+        "audioStatus": "pending",
     }
     profiles[request.testId] = profile
     evaulation = evaluate_music_features(request.music, db)
     sound_prompt = music_profile_to_sound_prompt(evaulation)
     image_prompt = music_profile_to_image_prompt(evaulation) + big5_to_prompt(personality_values)
     
-    print(sound_prompt)
-    print(image_prompt)
-    
-    #image = generate_image(image_prompt)
-    #image_path = GENERATED_DIR / f"{request.testId}.png"
-    #image.save(image_path)
-
-    #audio_array, sampling_rate = generate_music(sound_prompt)
-    #audio_path = GENERATED_DIR / f"{request.testId}.wav"
-    #save_audio(audio_array, sampling_rate, str(audio_path))
+    generation_pool.submit(generate_profile_image, request.testId, image_prompt)
+    generation_pool.submit(generate_profile_audio, request.testId, sound_prompt)
 
     return profile
 

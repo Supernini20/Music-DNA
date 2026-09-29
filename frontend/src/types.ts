@@ -4,6 +4,8 @@ export type MusicProfile = {
   request?: MusicProfileRequest;
   imageUrl?: string;
   audioUrl?: string;
+  imageStatus?: "pending" | "ready" | "failed";
+  audioStatus?: "pending" | "ready" | "failed";
 };
 
 type Rating = 1 | 2 | 3 | 4 | 5;

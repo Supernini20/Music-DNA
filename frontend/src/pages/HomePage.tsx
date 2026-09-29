@@ -43,8 +43,12 @@ export function HomePage() {
                 mx: "auto",
               }}
             >
-              Your music says something about you. Discover your personal music
-              profile through your preferences, memories, and associations.
+              Your music says something about &nbsp;
+              <Typography variant="span" sx={{ color: "primary.main" }}>
+                <b>YOU</b>
+              </Typography>
+              . Discover your personal music profile through your preferences,
+              memories, and associations.
             </Typography>
           </Box>
 
@@ -72,11 +76,18 @@ export function HomePage() {
             <MusicNoteIcon
               sx={{
                 position: "absolute",
-                top: 25,
+                top: 40,
                 left: 25,
-                fontSize: 28,
+                fontSize: 40,
                 opacity: 0.45,
-                transform: "rotate(-15deg)",
+                animation: "floatNote 2.2s ease-in-out infinite",
+                "@keyframes floatNote": {
+                  "0%, 100%": { transform: "translateY(0) rotate(-15deg)" },
+                  "50%": { transform: "translateY(-18px) rotate(-15deg)" },
+                },
+                "@media (prefers-reduced-motion: reduce)": {
+                  animation: "none",
+                },
               }}
             />
 
@@ -85,9 +96,17 @@ export function HomePage() {
                 position: "absolute",
                 bottom: 30,
                 right: 25,
-                fontSize: 34,
+                fontSize: 50,
                 opacity: 0.35,
-                transform: "rotate(15deg)",
+                animation: "floatNote 2.6s ease-in-out infinite",
+                animationDelay: "-1.2s",
+                "@keyframes floatNote": {
+                  "0%, 100%": { transform: "translateY(0) rotate(15deg)" },
+                  "50%": { transform: "translateY(18px) rotate(15deg)" },
+                },
+                "@media (prefers-reduced-motion: reduce)": {
+                  animation: "none",
+                },
               }}
             />
 
@@ -113,7 +132,7 @@ export function HomePage() {
                 mb: 2,
               }}
             >
-              Your music profile is waiting
+              Your music profile is waiting...
             </Typography>
 
             <Typography
@@ -126,7 +145,16 @@ export function HomePage() {
               }}
             >
               Answer a few questions and choose songs that mean something to
-              you. We will use them to create your personal musical profile.
+              &nbsp;
+              <Typography variant="span" sx={{ color: "primary.main" }}>
+                <b>YOU</b>
+              </Typography>
+              . We will use them to generate a visual and acoustic
+              representation of &nbsp;
+              <Typography variant="span" sx={{ color: "primary.main" }}>
+                <b>YOOU</b>
+              </Typography>
+              .
             </Typography>
 
             <Button

@@ -7,7 +7,6 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { ProfileHeader } from "../components/profile/ProfileHeader";
-import { ProfileSummary } from "../components/profile/ProfileSummary";
 import { GeneratedImage } from "../components/profile/GeneratedImage";
 import { GeneratedSound } from "../components/profile/GeneratedSound";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
@@ -23,9 +22,32 @@ export function ProfileResults() {
 
   useEffect(() => {
     if (!testId) return;
-    getMusicProfile(testId)
-      .then(setProfile)
-      .catch(() => setError("This profile could not be loaded."));
+    let cancelled = false;
+    let timeoutId: number | undefined;
+
+    const loadProfile = async () => {
+      try {
+        const nextProfile = await getMusicProfile(testId);
+        if (cancelled) return;
+
+        setProfile(nextProfile);
+        const imagePending =
+          !nextProfile.imageUrl && nextProfile.imageStatus !== "failed";
+        const audioPending =
+          !nextProfile.audioUrl && nextProfile.audioStatus !== "failed";
+        if (imagePending || audioPending) {
+          timeoutId = window.setTimeout(loadProfile, 3000);
+        }
+      } catch {
+        if (!cancelled) setError("This profile could not be loaded.");
+      }
+    };
+
+    void loadProfile();
+    return () => {
+      cancelled = true;
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
+    };
   }, [testId]);
 
   if (error) return <Typography sx={{ p: 4 }}>{error}</Typography>;
@@ -42,12 +64,8 @@ export function ProfileResults() {
     <Box className="profile-results">
       <Container maxWidth="md">
         <ProfileHeader />
-        <ProfileSummary personality={profile.personality} />
-        <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-          Test ID: {profile.testId}
-        </Typography>
-        <GeneratedSound audioUrl={audioUrl} />
-        <GeneratedImage imageUrl={imageUrl} />
+        <GeneratedSound audioUrl={audioUrl} status={profile.audioStatus} />
+        <GeneratedImage imageUrl={imageUrl} status={profile.imageStatus} />
         <Box
           sx={{
             display: "flex",

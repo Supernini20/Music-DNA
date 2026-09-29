@@ -37,19 +37,7 @@ export function ProfileHeader() {
           letterSpacing: "-0.03em",
         }}
       >
-        "Label"
-      </Typography>
-
-      <Typography
-        variant="body1"
-        color="text.secondary"
-        sx={{
-          maxWidth: 560,
-          mx: "auto",
-          mt: 2,
-        }}
-      >
-        "Your descirption here"
+        Generated Sound & Visual
       </Typography>
     </Box>
   );

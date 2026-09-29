@@ -3,9 +3,10 @@ import GraphicEqIcon from "@mui/icons-material/GraphicEq";
 
 type GeneratedSoundProps = {
   audioUrl?: string;
+  status?: "pending" | "ready" | "failed";
 };
 
-export function GeneratedSound({ audioUrl }: GeneratedSoundProps) {
+export function GeneratedSound({ audioUrl, status }: GeneratedSoundProps) {
   return (
     <Card
       elevation={0}
@@ -34,12 +35,12 @@ export function GeneratedSound({ audioUrl }: GeneratedSoundProps) {
 
       <Box
         sx={{
-          display: "flex",
+          display: "flex-column",
           alignItems: "center",
           gap: 2,
           p: 2,
           borderRadius: 3,
-          backgroundColor: "action.hover",
+          background: "linear-gradient(145deg, #e8e3ff 0%, #dceeff 100%)",
         }}
       >
         {audioUrl ? (
@@ -54,45 +55,43 @@ export function GeneratedSound({ audioUrl }: GeneratedSoundProps) {
             }}
           />
         ) : (
-          <Typography color="text.secondary">
-            Your generated sound is not available yet
-          </Typography>
+          <>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 0.5,
+                mt: 1.5,
+                height: 24,
+              }}
+            >
+              {[12, 20, 8, 18, 24, 14, 22, 10, 18, 7, 16, 12].map(
+                (height, index) => (
+                  <Box
+                    key={index}
+                    sx={{
+                      width: 4,
+                      height,
+                      borderRadius: 2,
+                      backgroundColor: "primary.main",
+                    }}
+                  />
+                ),
+              )}
+            </Box>
+            <Typography variant="h5" sx={{ fontWeight: 600 }}>
+              {status === "failed"
+                ? "Your generated sound could not be created"
+                : "Your generated sound is not available yet"}
+            </Typography>
+          </>
         )}
 
         <Box sx={{ flex: 1 }}>
-          <Typography variant="body1" sx={{ fontWeight: 600 }}>
-            Your musical identity
-          </Typography>
-
           <Typography variant="body2" color="text.secondary">
             A sound created from your profile
           </Typography>
-
-          {/* Temporary waveform */}
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 0.5,
-              mt: 1.5,
-              height: 24,
-            }}
-          >
-            {[12, 20, 8, 18, 24, 14, 22, 10, 18, 7, 16, 12].map(
-              (height, index) => (
-                <Box
-                  key={index}
-                  sx={{
-                    width: 4,
-                    height,
-                    borderRadius: 2,
-                    backgroundColor: "primary.main",
-                    opacity: 0.6,
-                  }}
-                />
-              ),
-            )}
-          </Box>
         </Box>
       </Box>
     </Card>
