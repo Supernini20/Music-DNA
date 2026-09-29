@@ -95,7 +95,7 @@ export function ProfileTest() {
               letterSpacing: "-0.03em",
             }}
           >
-            Get to know your musical self
+            What is your Music DNA?{" "}
           </Typography>
 
           <Typography
@@ -108,7 +108,11 @@ export function ProfileTest() {
             }}
           >
             Tell us a little about yourself and choose the songs that feel
-            meaningful to you.
+            meaningful to &nbsp;
+            <Typography variant="span" sx={{ color: "primary.main" }}>
+              <b>YOU</b>
+            </Typography>
+            .
           </Typography>
         </Box>
 
@@ -150,7 +154,7 @@ export function ProfileTest() {
               value={identifiesWith}
               onChange={(event) => setIdentifiesWith(event.target.value)}
               placeholder="Enter a song title"
-              helperText="Choose a song title you identify with."
+              helperText="Name a song title you identify with."
             />
           </Box>
         </Card>

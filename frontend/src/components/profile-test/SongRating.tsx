@@ -87,7 +87,7 @@ export function SongRating({ onChange }: SongRatingProps) {
       </Box>
 
       <Typography variant="body2" color="text.secondary" sx={{ mb: 4 }}>
-        Listen to a short excerpt of each song and rate how much you like it.
+        Listen to each song and rate how much you like it.
       </Typography>
 
       <Box>
@@ -149,10 +149,6 @@ function SongRatingItem({ song, rating, onRatingChange }: SongRatingItemProps) {
           gap: 1,
         }}
       >
-        <Typography variant="body2" color="text.secondary">
-          How much do you like this song?
-        </Typography>
-
         <Rating
           name={`rating-${song.trackId}`}
           value={rating ?? null}

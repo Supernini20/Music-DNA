@@ -112,7 +112,7 @@ export function SongSelection({ onChange }: SongSelectionProps) {
       </Box>
 
       <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
-        Choose three songs that say something about you.
+        Choose three songs that you enjoy.
       </Typography>
 
       <Autocomplete

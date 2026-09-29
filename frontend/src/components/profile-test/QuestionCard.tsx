@@ -10,13 +10,11 @@ interface Question {
 
 interface QuestionCardProps {
   question: Question;
-  index: number;
   answer: Answer;
   onAnswer: (value: Answer) => void;
 }
 export function QuestionCard({
   question,
-  index,
   answer,
   onAnswer,
 }: QuestionCardProps) {
@@ -50,17 +48,6 @@ export function QuestionCard({
           p: { xs: 3, md: 5 },
         }}
       >
-        <Typography
-          variant="body2"
-          sx={{
-            mb: 2,
-            color: "text.secondary",
-            fontWeight: 600,
-          }}
-        >
-          Frage {index + 1}
-        </Typography>
-
         <Typography
           component="h2"
           sx={{

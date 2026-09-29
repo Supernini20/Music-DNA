@@ -113,7 +113,6 @@ export function PersonalityQuestions({
       <QuestionCard
         key={currentQuestion}
         question={question}
-        index={currentQuestion}
         answer={currentAnswer}
         onAnswer={handleAnswer}
       />
