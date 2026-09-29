@@ -2,6 +2,8 @@ export type MusicProfile = {
   testId: string;
   personality: Record<string, number>;
   request?: MusicProfileRequest;
+  imageUrl?: string;
+  audioUrl?: string;
 };
 
 type Rating = 1 | 2 | 3 | 4 | 5;

@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
+from pathlib import Path
 
 from services.music_generator import save_audio, generate_music
 from services.image_generator import generate_image
@@ -20,6 +21,7 @@ router = APIRouter(
 )
 
 profiles: dict[str, dict] = {}
+GENERATED_DIR = Path(__file__).resolve().parents[2] / "generated"
 
 
 @router.post("/generate")
@@ -32,6 +34,8 @@ def generate(
         "testId": request.testId,
         "personality": personality_values,
         "request": request.model_dump(),
+        "imageUrl": f"/generated/{request.testId}.png",
+        "audioUrl": f"/generated/{request.testId}.wav",
     }
     profiles[request.testId] = profile
     evaulation = evaluate_music_features(request.music, db)
@@ -41,15 +45,13 @@ def generate(
     print(sound_prompt)
     print(image_prompt)
     
-    image = generate_image(image_prompt)
-    
-    image_path = f"generated/{request.testId}.png"
-    image.save(image_path)
+    #image = generate_image(image_prompt)
+    #image_path = GENERATED_DIR / f"{request.testId}.png"
+    #image.save(image_path)
 
-    #Works but expensive
-    #audio_array, sampling_rate = generate_music(request.prompt)
-    #audio_path = f"generated/{request.testId}.wav"
-    #save_audio(audio_array, sampling_rate, audio_path)
+    #audio_array, sampling_rate = generate_music(sound_prompt)
+    #audio_path = GENERATED_DIR / f"{request.testId}.wav"
+    #save_audio(audio_array, sampling_rate, str(audio_path))
 
     return profile
 
