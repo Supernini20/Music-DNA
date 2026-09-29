@@ -1,6 +1,8 @@
 import { Box, Card, Divider, Rating, Typography } from "@mui/material";
 import GraphicEqIcon from "@mui/icons-material/GraphicEq";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getSongs } from "../../api/api";
+import type { Track } from "../../types";
 
 interface RatingSong {
   trackId: string;
@@ -18,31 +20,25 @@ type SongRatingProps = {
   onChange?: (ratings: SongRatingValue[]) => void;
 };
 
-const songsToRate: RatingSong[] = [
-  {
-    trackId: "rating-1",
-    title: "Midnight City",
-    artist: "M83",
-    previewUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-  },
-  {
-    trackId: "rating-2",
-    title: "Teardrop",
-    artist: "Massive Attack",
-    previewUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-  },
-  {
-    trackId: "rating-3",
-    title: "Sweet Disposition",
-    artist: "The Temper Trap",
-    previewUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-  },
-];
-
 export function SongRating({ onChange }: SongRatingProps) {
+  const [songsToRate, setSongsToRate] = useState<RatingSong[]>([]);
   const [ratings, setRatings] = useState<
     Record<string, SongRatingValue["rating"]>
   >({});
+
+  useEffect(() => {
+    getSongs().then((tracks: Track[]) => {
+      setSongsToRate(
+        tracks.slice(0, 3).map((track) => ({
+          trackId: String(track.id),
+          title: track.title,
+          artist: track.artist,
+          previewUrl:
+            "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        })),
+      );
+    });
+  }, []);
 
   const handleRating = (trackId: string, value: number | null) => {
     if (!value) return;
