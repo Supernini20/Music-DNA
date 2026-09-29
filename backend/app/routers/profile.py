@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 
-from backend.services.music_generator import save_audio, generate_music
+from services.music_generator import save_audio, generate_music
 from services.image_generator import generate_image
 
 from ..calculate.calculate_music_features import evaluate_music_features

@@ -1,6 +1,10 @@
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
+
+from fastapi.staticfiles import StaticFiles
 
 from .database import Base, engine
 from .routers import songs
@@ -30,6 +34,15 @@ app = FastAPI(
     description="Backend für die Music-DNA Anwendung",
     version="1.0.0",
     lifespan=lifespan
+)
+
+BASE_DIR = Path(__file__).parent.parent.resolve()
+GENERATED_DIR = BASE_DIR / "generated"
+
+app.mount(
+    "/generated",
+    StaticFiles(directory=GENERATED_DIR),
+    name="generated",
 )
 
 app.add_middleware(
