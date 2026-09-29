@@ -11,6 +11,10 @@ export function searchSongs(query: string): Promise<Track[]> {
   return result;
 }
 
+export function getSongs(): Promise<Track[]> {
+  return apiRequest<Track[]>("/songs/");
+}
+
 export function getSong(id: string): Promise<Track> {
   return apiRequest<Track>(`/songs/${encodeURIComponent(id)}`);
 }
