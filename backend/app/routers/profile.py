@@ -78,7 +78,7 @@ def generate(
         personality_visuals,
     )
     image_prompt = build_image_prompt(visual_identity)
-    print(image_prompt)
+    #print(sound_prompt)
     
     #generation_pool.submit(generate_profile_image, request.testId, image_prompt)
     #generation_pool.submit(generate_profile_audio, request.testId, sound_prompt)

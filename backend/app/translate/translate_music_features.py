@@ -14,6 +14,31 @@ def music_profile_to_sound_prompt(
 
     lines = []
 
+    lines.append("SOUND GENERATION DIRECTION")
+    lines.append("==========================")
+    lines.append(
+        "Create one original, cohesive piece of music that feels personally "
+        "tailored to this listener's taste."
+    )
+    lines.append(
+        "Use the FAVORITE SONGS profile as the primary creative direction and "
+        "the RATED SONGS profile as supporting evidence."
+    )
+    lines.append(
+        "Translate the measurements into audible choices such as mood, energy, "
+        "tempo, vocal presence, instrumentation, groove, harmony, and texture."
+    )
+    lines.append(
+        "Favor a clear musical identity and a satisfying progression over a "
+        "literal or mechanical reproduction of the numbers."
+    )
+    lines.append(
+        "The result should be a complete listenable track, not an explanation "
+        "of the profile or a list of settings. Do not imitate or copy any "
+        "specific existing song."
+    )
+
+    lines.append("")
     lines.append("MUSIC PROFILE")
     lines.append("==============")
 
