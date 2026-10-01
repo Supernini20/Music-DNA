@@ -10,6 +10,7 @@ from ..calculate.calculate_music_features import evaluate_music_features
 from ..translate.translate_music_features import music_profile_to_sound_prompt
 from ..translate.translate_music_features_to_visuals import music_profile_to_image_prompt
 from ..translate.translate_visuals import big5_to_prompt
+from ..translate.translate_visual_identity import build_image_prompt, build_visual_identity
 
 from ..database import get_db
 from ..calculate.calculate_profiles import calculate_big_five
@@ -70,10 +71,17 @@ def generate(
     profiles[request.testId] = profile
     evaulation = evaluate_music_features(request.music, db)
     sound_prompt = music_profile_to_sound_prompt(evaulation)
-    image_prompt = music_profile_to_image_prompt(evaulation) + big5_to_prompt(personality_values)
+    music_visuals = music_profile_to_image_prompt(evaulation)
+    personality_visuals = big5_to_prompt(personality_values)
+    visual_identity = build_visual_identity(
+        music_visuals,
+        personality_visuals,
+    )
+    image_prompt = build_image_prompt(visual_identity)
+    print(image_prompt)
     
-    generation_pool.submit(generate_profile_image, request.testId, image_prompt)
-    generation_pool.submit(generate_profile_audio, request.testId, sound_prompt)
+    #generation_pool.submit(generate_profile_image, request.testId, image_prompt)
+    #generation_pool.submit(generate_profile_audio, request.testId, sound_prompt)
 
     return profile
 

@@ -9,7 +9,14 @@ def music_profile_to_image_prompt(
     suitable for an image-generation AI.
     """
 
-    visual_concepts = []
+    visual_concepts = {
+        "mood": [],
+        "palette": [],
+        "movement": [],
+        "density": [],
+        "texture": [],
+        "aesthetic": [],
+    }
 
     # --------------------------------------------------------
     # Favorites are the primary source of the visual identity
@@ -17,76 +24,27 @@ def music_profile_to_image_prompt(
 
     favorites = music_profile.favorites
 
-    visual_concepts.extend(
-        _interpret_mood(favorites.features)
-    )
-
-    visual_concepts.extend(
-        _interpret_energy(favorites.features)
-    )
-
-    visual_concepts.extend(
-        _interpret_danceability(favorites.features)
-    )
-
-    visual_concepts.extend(
-        _interpret_complexity(favorites.features)
-    )
-
-    visual_concepts.extend(
-        _interpret_authenticity(favorites.features)
-    )
-
-    visual_concepts.extend(
-        _interpret_timeliness(favorites.features)
-    )
-
-    visual_concepts.extend(
-        _interpret_tonality(favorites.features)
-    )
-
-    visual_concepts.extend(
-        _interpret_voice(favorites.features)
-    )
-
-    visual_concepts.extend(
-        _interpret_tempo(favorites.bpm)
-    )
-
-    visual_concepts.extend(
-        _interpret_genres(favorites.genres)
-    )
+    visual_concepts["mood"].extend(_interpret_mood(favorites.features))
+    visual_concepts["mood"].extend(_interpret_voice(favorites.features))
+    visual_concepts["palette"].extend(_interpret_palette(favorites.features))
+    visual_concepts["movement"].extend(_interpret_energy(favorites.features))
+    visual_concepts["movement"].extend(_interpret_danceability(favorites.features))
+    visual_concepts["movement"].extend(_interpret_tempo(favorites.bpm))
+    visual_concepts["density"].extend(_interpret_complexity(favorites.features))
+    visual_concepts["texture"].extend(_interpret_authenticity(favorites.features))
+    visual_concepts["texture"].extend(_interpret_tonality(favorites.features))
+    visual_concepts["aesthetic"].extend(_interpret_timeliness(favorites.features))
+    visual_concepts["aesthetic"].extend(_interpret_genres(favorites.genres))
 
     # --------------------------------------------------------
     # Build prompt
     # --------------------------------------------------------
 
-    lines = [
-        "Create a visual representation of a person's musical identity.",
-        "",
-        "VISUAL CHARACTERISTICS:",
-    ]
-
-    for concept in visual_concepts:
-        lines.append(f"- {concept}")
-
-    lines.extend([
-        "",
-        "The image should feel coherent and artistic rather "
-        "than like a literal visualization of music.",
-        "Use the musical characteristics as inspiration for:",
-        "- color atmosphere",
-        "- lighting",
-        "- environment",
-        "- movement",
-        "- texture",
-        "- visual density",
-        "- emotional expression",
-        "- overall composition",
-        "",
-        "Do not display numerical values, graphs, charts, "
-        "or technical music terminology in the image.",
-    ])
+    lines = ["MUSIC VISUAL FOUNDATION"]
+    for section, concepts in visual_concepts.items():
+        if concepts:
+            lines.append(f"{section.upper()}: " + "; ".join(concepts))
+    lines.append(f"GENRE AESTHETIC: {music_profile.identifiesWith}")
 
     return "\n".join(lines)
 
@@ -119,6 +77,24 @@ def _interpret_mood(features) -> list[str]:
     return [
         "introspective, melancholic and emotionally darker atmosphere"
     ]
+
+
+def _interpret_palette(features) -> list[str]:
+    value = _get_mean(features, "valence")
+
+    if value is None:
+        return []
+
+    if value >= 0.75:
+        return ["luminous warm palette with optimistic color contrast"]
+
+    if value >= 0.55:
+        return ["warm balanced palette with clear, inviting accents"]
+
+    if value >= 0.35:
+        return ["muted palette balancing warm and cool atmospheric tones"]
+
+    return ["deep cool palette with restrained, introspective highlights"]
 
 
 # ============================================================
