@@ -7,7 +7,7 @@ from .database import SessionLocal
 from .models_song import Song
 
 
-DATA_DIR = Path(__file__).resolve().parent.parent / "data_files_very_small"
+DATA_DIR = Path(__file__).resolve().parent.parent / "data_files_small"
 #print("Existiert:", DATA_DIR.exists())
 
 def import_songs():
