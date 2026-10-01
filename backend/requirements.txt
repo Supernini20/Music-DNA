@@ -4,3 +4,6 @@ sqlalchemy
 pydantic
 python-dotenv
 huggingface_hub
+transformers
+torch
+scipy
