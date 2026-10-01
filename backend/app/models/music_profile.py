@@ -25,7 +25,7 @@ class RatedSong(BaseModel):
 class Music(BaseModel):
     favoriteSongs: list[str]
     identifiesWith: str
-    ratedSongs: list[RatedSong]
+    ratedSongs: list[RatedSong] = Field(min_length=7, max_length=7)
 
 
 class ProfileRequest(BaseModel):

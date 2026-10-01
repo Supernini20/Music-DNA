@@ -35,7 +35,7 @@ export function ProfileTest() {
     Object.keys(personalityAnswers).length === questions.length &&
     favoriteSongs.length === 3 &&
     identifiesWith.trim().length > 0 &&
-    ratedSongs.length === 3;
+    ratedSongs.length === 7;
 
   const handleFinishTest = async () => {
     const request: MusicProfileRequest = {

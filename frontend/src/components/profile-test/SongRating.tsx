@@ -1,8 +1,18 @@
-import { Box, Card, Divider, Rating, Typography } from "@mui/material";
+import { Alert, Box, Card, Divider, Rating, Typography } from "@mui/material";
 import GraphicEqIcon from "@mui/icons-material/GraphicEq";
 import { useEffect, useState } from "react";
 import { getSongs } from "../../api/api";
 import type { Track } from "../../types";
+
+const RATING_TRACK_IDS = [
+  "6421ac0d672791ee89603fcb",
+  "6421bb50672791ee89603ffa",
+  "6421be57672791ee89604002",
+  "6421c36d672791ee89604011",
+  "6421d0c1672791ee89604042",
+  "6421e92f672791ee89604089",
+  "6421ef27672791ee8960409d",
+] as const;
 
 interface RatingSong {
   trackId: string;
@@ -22,22 +32,40 @@ type SongRatingProps = {
 
 export function SongRating({ onChange }: SongRatingProps) {
   const [songsToRate, setSongsToRate] = useState<RatingSong[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [ratings, setRatings] = useState<
     Record<string, SongRatingValue["rating"]>
   >({});
 
   useEffect(() => {
-    getSongs().then((tracks: Track[]) => {
-      setSongsToRate(
-        tracks.slice(0, 3).map((track) => ({
-          trackId: String(track.id),
-          title: track.title,
-          artist: track.artist,
-          previewUrl:
-            "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-        })),
-      );
-    });
+    getSongs()
+      .then((tracks: Track[]) => {
+        const tracksByExternalId = new Map(
+          tracks.map((track) => [track.external_id, track]),
+        );
+
+        setSongsToRate(
+          RATING_TRACK_IDS.map((externalId) => {
+            const track = tracksByExternalId.get(externalId);
+
+            if (!track) return null;
+
+            return {
+              trackId: String(track.id),
+              title: track.title,
+              artist: track.artist,
+              previewUrl: `/${externalId}.mp3`,
+            };
+          }).filter((song): song is RatingSong => song !== null),
+        );
+      })
+      .catch(() => {
+        setLoadError(
+          "We could not load the rating songs. Make sure the backend is running on localhost:8000.",
+        );
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   const handleRating = (trackId: string, value: number | null) => {
@@ -90,7 +118,26 @@ export function SongRating({ onChange }: SongRatingProps) {
         Listen to each song and rate how much you like it.
       </Typography>
 
-      <Box>
+      {isLoading && (
+        <Typography color="text.secondary">Loading songs...</Typography>
+      )}
+
+      {loadError && <Alert severity="error">{loadError}</Alert>}
+
+      {!isLoading && !loadError && songsToRate.length === 0 && (
+        <Alert severity="warning">
+          The rating songs were not found in the database.
+        </Alert>
+      )}
+
+      <Box
+        sx={{
+          display:
+            isLoading || loadError || songsToRate.length === 0
+              ? "none"
+              : "block",
+        }}
+      >
         {songsToRate.map((song, index) => (
           <Box key={song.trackId}>
             <SongRatingItem

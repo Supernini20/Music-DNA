@@ -61,6 +61,7 @@ export interface TrackIds {
 }
 export interface Track {
   id: string;
+  external_id: string;
   title: string;
   album?: string;
   artist: string;
