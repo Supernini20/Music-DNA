@@ -59,17 +59,17 @@ def _interpret_mood(features) -> list[str]:
     if value is None:
         return []
 
-    if value >= 0.75:
+    if value >= 0.25:
         return [
             "strongly positive and uplifting emotional atmosphere"
         ]
 
-    if value >= 0.55:
+    if value >= -0.25:
         return [
             "warm, positive and emotionally balanced atmosphere"
         ]
 
-    if value >= 0.35:
+    if value >= -0.6:
         return [
             "emotionally balanced atmosphere with some melancholy"
         ]
@@ -85,13 +85,13 @@ def _interpret_palette(features) -> list[str]:
     if value is None:
         return []
 
-    if value >= 0.75:
+    if value >= 0.25:
         return ["luminous warm palette with optimistic color contrast"]
 
-    if value >= 0.55:
+    if value >= -0.25:
         return ["warm balanced palette with clear, inviting accents"]
 
-    if value >= 0.35:
+    if value >= -0.6:
         return ["muted palette balancing warm and cool atmospheric tones"]
 
     return ["deep cool palette with restrained, introspective highlights"]
@@ -107,20 +107,20 @@ def _interpret_energy(features) -> list[str]:
     if value is None:
         return []
 
-    if value >= 0.75:
+    if value >= 0.5:
         return [
             "high emotional energy",
             "dynamic and intense visual atmosphere",
             "strong contrasts and a sense of movement",
         ]
 
-    if value >= 0.55:
+    if value >= 0.0:
         return [
             "moderately energetic atmosphere",
             "subtle visual movement",
         ]
 
-    if value >= 0.35:
+    if value >= -0.8:
         return [
             "calm and restrained energy",
             "slow visual rhythm",
@@ -169,19 +169,19 @@ def _interpret_complexity(features) -> list[str]:
     if value is None:
         return []
 
-    if value >= 0.75:
+    if value >= 0.5:
         return [
             "high visual complexity",
             "layered textures and intricate details",
             "rich and multifaceted composition",
         ]
 
-    if value >= 0.55:
+    if value >= 0.0:
         return [
             "moderately detailed and layered visual composition",
         ]
 
-    if value >= 0.35:
+    if value >= -0.5:
         return [
             "relatively simple and balanced visual composition",
         ]
@@ -202,13 +202,13 @@ def _interpret_authenticity(features) -> list[str]:
     if value is None:
         return []
 
-    if value >= 0.75:
+    if value >= 0.5:
         return [
             "raw, authentic and human visual character",
             "organic textures and imperfect details",
         ]
 
-    if value >= 0.55:
+    if value >= 0.0:
         return [
             "natural and emotionally authentic appearance",
         ]
@@ -228,13 +228,13 @@ def _interpret_timeliness(features) -> list[str]:
     if value is None:
         return []
 
-    if value >= 0.75:
+    if value >= 0.5:
         return [
             "contemporary and forward-looking aesthetic",
             "modern visual language",
         ]
 
-    if value >= 0.55:
+    if value >= 0.0:
         return [
             "modern aesthetic with some timeless qualities",
         ]

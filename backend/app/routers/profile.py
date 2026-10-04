@@ -22,7 +22,15 @@ router = APIRouter(
     tags=["Music Profile"],
 )
 
-profiles: dict[str, dict] = {"test-id": {}}
+profiles: dict[str, dict] = {"test-id": {}, "test-001": {
+        "testId": "test-001",
+        "personality": None,
+        "request": None,
+        "imageUrl": "/generated/test-005_v3.png",
+        "audioUrl": "/generated/test-001.wav",
+        "imageStatus": "ready",
+        "audioStatus": "ready",
+    }}
 GENERATED_DIR = Path(__file__).resolve().parents[2] / "generated"
 generation_pool = ThreadPoolExecutor(max_workers=2)
 
@@ -78,10 +86,10 @@ def generate(
         personality_visuals,
     )
     image_prompt = build_image_prompt(visual_identity)
-    #print(sound_prompt)
+    print(sound_prompt)
     
-    #generation_pool.submit(generate_profile_image, request.testId, image_prompt)
-    #generation_pool.submit(generate_profile_audio, request.testId, sound_prompt)
+    generation_pool.submit(generate_profile_image, request.testId, image_prompt)
+    generation_pool.submit(generate_profile_audio, request.testId, sound_prompt)
 
     return profile
 

@@ -14,8 +14,7 @@ def music_profile_to_sound_prompt(
 
     lines = []
 
-    lines.append("SOUND GENERATION DIRECTION")
-    lines.append("==========================")
+    lines.append("SOUND GENERATION DIRECTION:")
     lines.append(
         "Create one original, cohesive piece of music that feels personally "
         "tailored to this listener's taste."
@@ -37,10 +36,10 @@ def music_profile_to_sound_prompt(
         "of the profile or a list of settings. Do not imitate or copy any "
         "specific existing song."
     )
+    lines.append("The first value after a music feature is the mean, and the second value is the standard deviation.")
 
     lines.append("")
-    lines.append("MUSIC PROFILE")
-    lines.append("==============")
+    lines.append("MUSIC PROFILE:")
 
     lines.append(
         f"Identifies with: "
@@ -52,8 +51,7 @@ def music_profile_to_sound_prompt(
     # --------------------------------------------------------
 
     lines.append("")
-    lines.append("FAVORITE SONGS")
-    lines.append("--------------")
+    lines.append("FAVORITE SONGS:")
 
     lines.extend(
         _features_to_lines(
@@ -78,8 +76,7 @@ def music_profile_to_sound_prompt(
     # --------------------------------------------------------
 
     lines.append("")
-    lines.append("RATED SONGS")
-    lines.append("-----------")
+    lines.append("RATED SONGS:")
 
     lines.extend(
         _features_to_lines(
@@ -93,11 +90,13 @@ def music_profile_to_sound_prompt(
         )
     )
 
+    """
     lines.append(
         _genres_to_line(
             music_profile.rated.genres
         )
     )
+    """
 
     return "\n".join(lines)
 
@@ -112,11 +111,11 @@ def _features_to_lines(features) -> list[str]:
 
         line = (
             f"{feature_name}: "
-            f"mean={statistics.mean:.4f}"
+            f"{statistics.mean:.4f}"
         )
 
         if statistics.std is not None:
-            line += f", std={statistics.std:.4f}"
+            line += f",{statistics.std:.4f}"
 
         lines.append(line)
 
