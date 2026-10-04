@@ -3,7 +3,7 @@ venv/
 .venv/
 env/
 *.env
-generated/
+generated_Tests/
 
 # Python
 __pycache__/
